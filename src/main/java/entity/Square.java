@@ -1,5 +1,10 @@
 package entity;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+
+@EqualsAndHashCode
+@Getter
 public class Square {
     private int x;
     private int y;

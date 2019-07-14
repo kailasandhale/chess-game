@@ -1,7 +1,7 @@
 package entity;
 
 public class Board {
-    private Square [][] squares= new Square[8][8];
+    private final Square [][] squares= new Square[8][8];
     public Board(){
         for(int horizontalIndex = 0 ; horizontalIndex < 8; horizontalIndex++){
             initialiseColumn(horizontalIndex);
