@@ -1,4 +1,6 @@
-package entity;
+package com.qualys.entity;
+
+import java.util.List;
 
 public class Bishop extends Piece {
     public Bishop(boolean alive, Square position) {
@@ -13,5 +15,15 @@ public class Bishop extends Piece {
         int horizontalDiff = Math.abs(source.getX() - dest.getX());
         int verticalDiff = Math.abs(source.getY() - dest.getY());
         return  horizontalDiff == verticalDiff;
+    }
+
+    @Override
+    public List<Square> getPossibleMoves(Board board, Player player) {
+        return null;
+    }
+
+    @Override
+    public boolean isValidTarget(Square square) {
+        return false;
     }
 }

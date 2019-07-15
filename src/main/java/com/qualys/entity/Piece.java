@@ -1,10 +1,14 @@
-package entity;
+package com.qualys.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
+@EqualsAndHashCode
 public abstract class Piece {
     private boolean alive;
     private Square position;
@@ -14,4 +18,8 @@ public abstract class Piece {
         }
         return source.isValid() && dest.isValid();
     }
+
+    public abstract List<Square> getPossibleMoves(Board board, Player player);
+
+    public abstract boolean isValidTarget(Square square);
 }

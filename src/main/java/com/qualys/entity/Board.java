@@ -1,4 +1,4 @@
-package entity;
+package com.qualys.entity;
 
 public class Board {
     private final Square [][] squares= new Square[8][8];
