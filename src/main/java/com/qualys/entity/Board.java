@@ -1,5 +1,8 @@
 package com.qualys.entity;
 
+import lombok.Getter;
+
+@Getter
 public class Board {
     private final Square [][] squares= new Square[8][8];
     public Board(){

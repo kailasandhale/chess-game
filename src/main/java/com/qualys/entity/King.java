@@ -1,12 +1,12 @@
 package com.qualys.entity;
 
+import com.qualys.util.CacheUtil;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class King extends Piece {
-    public King(boolean isAlive, Square square){
-        super(isAlive,square);
-    }
 
     @Override
     public boolean isValidMove(Board board, Square source, Square dest){
@@ -48,4 +48,20 @@ public class King extends Piece {
         return false;
     }
 
+
+    public boolean isCheckMate(){
+        List<Piece> pieces = getOpponentPiecesGivingCheck();
+        if(pieces.isEmpty()){
+            return false;
+        }
+        return true;
+    }
+
+
+    private List<Piece> getOpponentPiecesGivingCheck() {
+        Player opponent = new Player(!this.isWhite());
+        return opponent.getPieces().stream()
+                .filter(piece -> piece.isValidTarget(this.getPosition()))
+                .collect(Collectors.toList());
+    }
 }

@@ -19,4 +19,5 @@ public class Square {
     public Square getNeighbour(int horizontal, int vertical) {
         return new Square(getX() + horizontal, getY() + vertical);
     }
+
 }
