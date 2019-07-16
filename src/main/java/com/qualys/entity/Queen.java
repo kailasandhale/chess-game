@@ -24,4 +24,9 @@ public class Queen extends Piece {
     public boolean isValidTarget(Square square) {
         return false;
     }
+
+    @Override
+    protected List<Square> getSquaresTillLocation(Square position) {
+        return null;
+    }
 }

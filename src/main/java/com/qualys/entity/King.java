@@ -4,6 +4,7 @@ import com.qualys.exception.IllegalStatesException;
 import com.qualys.util.CacheUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,6 +45,11 @@ public class King extends Piece {
         return possibleMoves;
     }
 
+    @Override
+    protected List<Square> getSquaresTillLocation(Square position) {
+        return Collections.emptyList();
+    }
+
     public boolean isCheckMate() throws IllegalStatesException {
         Player opponent = getOpponentPlayer();
         List<Piece> opponentPiecesGivingCheck = getOpponentPiecesGivingCheck(opponent);
@@ -52,21 +58,26 @@ public class King extends Piece {
             return false;
         } else if(opponentPiecesGivingCheck.size() > 1){
             return true;
+        } else if(opponentPiecesGivingCheck.size() == 1){
+            Piece pieceGivingCheck = opponentPiecesGivingCheck.get(0);
+            return canBeKilledOrBlocked(pieceGivingCheck);
         }
-
-        return true;
+        return false;
     }
 
-    @Override
-    public boolean isValidTarget(List<Square> square) {
-        return false;
+    private boolean canBeKilledOrBlocked(Piece piece) {
+        List<Square> squaresBetweenPieceAndKing = getSquaresBetweenPieceAndKing(piece);
+        return squaresBetweenPieceAndKing.stream().anyMatch(this::isValidTarget);
+    }
+
+    private List<Square> getSquaresBetweenPieceAndKing(Piece piece) {
+        return piece.getSquaresTillLocation(piece.getPosition());
     }
 
     private boolean allPossiblePositionsChecked(Player opponent, List<Square> possibleMoves) {
         return opponent.getPieces().stream()
                 .allMatch(piece -> piece.isValidTarget(possibleMoves));
     }
-
 
     private List<Piece> getOpponentPiecesGivingCheck(Player opponent) {
 

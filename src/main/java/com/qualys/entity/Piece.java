@@ -44,4 +44,6 @@ public abstract class Piece {
     protected Player getPlayer() {
         return new Player(this.isWhite());
     }
+
+    protected abstract List<Square> getSquaresTillLocation(Square position);
 }

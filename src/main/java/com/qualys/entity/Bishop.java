@@ -28,4 +28,9 @@ public class Bishop extends Piece {
     public boolean isValidTarget(List<Square> square) {
         return false;
     }
+
+    @Override
+    protected List<Square> getSquaresTillLocation(Square position) {
+        return null;
+    }
 }

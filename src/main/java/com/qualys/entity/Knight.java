@@ -1,5 +1,6 @@
 package com.qualys.entity;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Knight extends Piece {
@@ -17,6 +18,11 @@ public class Knight extends Piece {
     @Override
     public List<Square> getPossibleMoves(Player player) {
         return null;
+    }
+
+    @Override
+    protected List<Square> getSquaresTillLocation(Square position) {
+        return Collections.singletonList(position);
     }
 
 }
