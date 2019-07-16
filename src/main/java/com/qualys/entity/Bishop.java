@@ -3,13 +3,10 @@ package com.qualys.entity;
 import java.util.List;
 
 public class Bishop extends Piece {
-    public Bishop(boolean alive, Square position) {
-        super(alive, position);
-    }
 
     @Override
-    protected boolean isValidMove(Board board, Square source, Square dest) {
-        if(!super.isValidMove(board, source, dest)){
+    protected boolean isValidMove( Square source, Square dest) {
+        if(!super.isValidMove( source, dest)){
             return false;
         }
         int horizontalDiff = Math.abs(source.getX() - dest.getX());
@@ -18,12 +15,17 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public List<Square> getPossibleMoves(Board board, Player player) {
+    public List<Square> getPossibleMoves( Player player) {
         return null;
     }
 
     @Override
     public boolean isValidTarget(Square square) {
+        return false;
+    }
+
+    @Override
+    public boolean isValidTarget(List<Square> square) {
         return false;
     }
 }

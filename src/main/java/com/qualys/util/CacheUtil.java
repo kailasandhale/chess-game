@@ -3,6 +3,7 @@ package com.qualys.util;
 import com.qualys.entity.Piece;
 import com.qualys.entity.Player;
 import com.qualys.entity.Square;
+import com.qualys.exception.IllegalStatesException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +12,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+import static com.qualys.exception.IllegalStatesException.OPPONENT_NOT_PRESENT_EXCEPTION;
+
 public class CacheUtil {
+
+    private CacheUtil(){
+        /* Added a private constructor to hide implicit public one */
+    }
     private static List<Player> players = new ArrayList<>();
 
     private static final Map<Square, Piece> squarePieceMap = new HashMap<>();
@@ -33,10 +40,10 @@ public class CacheUtil {
         return squarePieceMap;
     }
 
-    public static Player getPlayer(boolean isWhite){
+    public static Player getPlayer(boolean isWhite) throws IllegalStatesException {
         Player player = new Player(isWhite);
         Optional<Player> optionalPlayer = players.stream().filter(player::equals).findFirst();
-        return optionalPlayer.get();
+        return optionalPlayer.orElseThrow(() -> new IllegalStatesException(OPPONENT_NOT_PRESENT_EXCEPTION));
     }
 
 

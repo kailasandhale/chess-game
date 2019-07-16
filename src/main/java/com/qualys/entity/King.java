@@ -1,5 +1,6 @@
 package com.qualys.entity;
 
+import com.qualys.exception.IllegalStatesException;
 import com.qualys.util.CacheUtil;
 
 import java.util.ArrayList;
@@ -9,8 +10,8 @@ import java.util.stream.Collectors;
 public class King extends Piece {
 
     @Override
-    public boolean isValidMove(Board board, Square source, Square dest){
-       if(!super.isValidMove(board,source,dest)){
+    public boolean isValidMove(Square source, Square dest){
+       if(!super.isValidMove(source,dest)){
            return false;
        }
         int horizontalDiff = Math.abs(source.getX() - dest.getX());
@@ -19,7 +20,7 @@ public class King extends Piece {
     }
 
     @Override
-    public List<Square> getPossibleMoves(Board board, Player player) {
+    public List<Square> getPossibleMoves(Player player) {
         List<Square> possibleMoves = new ArrayList<>();
         Square currentPosition = this.getPosition();
         int[][] offsets = {
@@ -43,25 +44,35 @@ public class King extends Piece {
         return possibleMoves;
     }
 
-    @Override
-    public boolean isValidTarget(Square square) {
-        return false;
-    }
-
-
-    public boolean isCheckMate(){
-        List<Piece> pieces = getOpponentPiecesGivingCheck();
-        if(pieces.isEmpty()){
+    public boolean isCheckMate() throws IllegalStatesException {
+        Player opponent = getOpponentPlayer();
+        List<Piece> opponentPiecesGivingCheck = getOpponentPiecesGivingCheck(opponent);
+        List<Square> possibleMoves = getPossibleMoves(CacheUtil.getPlayer(this.isWhite()));
+        if(opponentPiecesGivingCheck.isEmpty() || !allPossiblePositionsChecked(opponent, possibleMoves)){
             return false;
+        } else if(opponentPiecesGivingCheck.size() > 1){
+            return true;
         }
+
         return true;
     }
 
+    @Override
+    public boolean isValidTarget(List<Square> square) {
+        return false;
+    }
 
-    private List<Piece> getOpponentPiecesGivingCheck() {
-        Player opponent = new Player(!this.isWhite());
+    private boolean allPossiblePositionsChecked(Player opponent, List<Square> possibleMoves) {
+        return opponent.getPieces().stream()
+                .allMatch(piece -> piece.isValidTarget(possibleMoves));
+    }
+
+
+    private List<Piece> getOpponentPiecesGivingCheck(Player opponent) {
+
         return opponent.getPieces().stream()
                 .filter(piece -> piece.isValidTarget(this.getPosition()))
                 .collect(Collectors.toList());
     }
+
 }

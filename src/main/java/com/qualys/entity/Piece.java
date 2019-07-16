@@ -19,14 +19,29 @@ public abstract class Piece {
     private boolean alive;
     private Square position;
     private boolean white;
-    protected boolean isValidMove(Board board, Square source, Square dest){
+    protected boolean isValidMove( Square source, Square dest){
         if(source.equals(dest)){
             return false;
         }
         return source.isValid() && dest.isValid();
     }
 
-    public abstract List<Square> getPossibleMoves(Board board, Player player);
+    public abstract List<Square> getPossibleMoves(Player player);
 
-    public abstract boolean isValidTarget(Square square);
+    public boolean isValidTarget(Square square) {
+        return getPossibleMoves(this.getPlayer()).contains(square);
+    }
+
+    public boolean isValidTarget(List<Square> square) {
+        List<Square> possibleMoves = getPossibleMoves(this.getPlayer());
+        return possibleMoves.containsAll(square);
+    }
+
+    protected  Player getOpponentPlayer() {
+        return new Player(!this.isWhite());
+    }
+
+    protected Player getPlayer() {
+        return new Player(this.isWhite());
+    }
 }
