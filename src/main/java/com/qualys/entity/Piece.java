@@ -26,23 +26,16 @@ public abstract class Piece {
         return source.isValid() && dest.isValid();
     }
 
-    public abstract List<Square> getPossibleMoves(Player player);
-
     public boolean isValidTarget(Square square) {
-        return getPossibleMoves(this.getPlayer()).contains(square);
+        return isValidMove(this.getPosition(),square);
     }
 
     public boolean isValidTarget(List<Square> square) {
-        List<Square> possibleMoves = getPossibleMoves(this.getPlayer());
-        return possibleMoves.containsAll(square);
+        return square.stream().allMatch(currentPosition -> isValidMove(this.getPosition(),currentPosition));
     }
 
     protected  Player getOpponentPlayer() {
         return new Player(!this.isWhite());
-    }
-
-    protected Player getPlayer() {
-        return new Player(this.isWhite());
     }
 
     protected abstract List<Square> getSquaresTillLocation(Square position);

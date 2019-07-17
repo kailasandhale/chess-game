@@ -15,11 +15,6 @@ public class Rook extends Piece {
     }
 
     @Override
-    public List<Square> getPossibleMoves( Player player) {
-        return null;
-    }
-
-    @Override
     public boolean isValidTarget(Square square) {
         return false;
     }
