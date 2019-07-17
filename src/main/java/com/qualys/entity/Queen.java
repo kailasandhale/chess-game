@@ -18,6 +18,6 @@ public class Queen extends Piece {
 
     @Override
     protected List<Square> getSquaresTillLocation(Square position) {
-        return Collections.emptyList();
+        return Collections.emptyList(); //TODO this will be implemented in full implementation
     }
 }
