@@ -5,7 +5,7 @@ import com.qualys.entity.Player;
 import com.qualys.entity.Square;
 import com.qualys.exception.IllegalStatesException;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,13 +13,15 @@ import java.util.Objects;
 import java.util.Optional;
 
 import static com.qualys.exception.IllegalStatesException.OPPONENT_NOT_PRESENT_EXCEPTION;
+import static com.qualys.util.Constants.BLACK;
+import static com.qualys.util.Constants.WHITE;
 
 public class CacheUtil {
 
     private CacheUtil(){
         /* Added a private constructor to hide implicit public one */
     }
-    private static List<Player> players = new ArrayList<>(); // This needs to be loaded by the application on startup
+    private static final List<Player> players = Arrays.asList(new Player(WHITE), new Player(BLACK));
 
     private static final Map<Square, Piece> squarePieceMap = new HashMap<>();
 

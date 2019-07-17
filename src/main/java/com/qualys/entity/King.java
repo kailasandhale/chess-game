@@ -20,7 +20,7 @@ public class King extends Piece {
         return horizontalDiff <= 1 && verticalDiff <= 1 && horizontalDiff + verticalDiff >= 1;
     }
 
-    public List<Square> getPossibleMoves(Player player) {
+    private List<Square> getPossibleMoves(Player player) {
         List<Square> possibleMoves = new ArrayList<>();
         Square currentPosition = this.getPosition();
         int[][] offsets = {

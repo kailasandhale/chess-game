@@ -1,9 +1,10 @@
 package com.qualys.entity;
 
-import java.util.ArrayList;
+import com.qualys.behaviour.MovementBehaviour;
+
 import java.util.List;
 
-public class Bishop extends Piece {
+public class Bishop extends Piece implements MovementBehaviour {
 
     @Override
     protected boolean isValidMove( Square source, Square dest) {
@@ -17,27 +18,6 @@ public class Bishop extends Piece {
 
     @Override
     protected List<Square> getSquaresTillLocation(Square target) {
-        Square currentPosition = this.getPosition();
-        int horizontalDiff = target.getX() - currentPosition.getX();
-        int verticalDiff = target.getY() - currentPosition.getY();
-
-        int horizontalFactor = getFactor(horizontalDiff < 0);
-        int verticalFactor = getFactor(verticalDiff < 0);
-
-        List<Square> squares = new ArrayList<>();
-        while (!currentPosition.equals(target)){
-            squares.add(currentPosition);
-            currentPosition.setX(currentPosition.getX() + horizontalFactor);
-            currentPosition.setY(currentPosition.getY() + verticalFactor);
-        }
-        return squares;
-    }
-
-    private int getFactor(boolean condition) {
-        int horizontalFactor = 1;
-        if (condition) {
-            horizontalFactor = -1;
-        }
-        return horizontalFactor;
+        return bishopMovement(this.getPosition(),target);
     }
 }
