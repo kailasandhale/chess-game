@@ -17,7 +17,7 @@ public class Knight extends Piece {
 
     @Override
     protected List<Square> getSquaresTillLocation(Square position) {
-        return Collections.singletonList(position);
+        return Collections.singletonList(this.getPosition());
     }
 
 }

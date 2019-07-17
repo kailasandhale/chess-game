@@ -1,5 +1,6 @@
 package com.qualys.entity;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Bishop extends Piece {
@@ -15,17 +16,7 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public boolean isValidTarget(Square square) {
-        return false;
-    }
-
-    @Override
-    public boolean isValidTarget(List<Square> square) {
-        return false;
-    }
-
-    @Override
     protected List<Square> getSquaresTillLocation(Square position) {
-        return null;
+        return Collections.emptyList();
     }
 }

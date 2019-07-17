@@ -14,12 +14,6 @@ public class Rook extends Piece {
     }
 
     @Override
-    public boolean isValidTarget(Square square) {
-        Square currentPosition = this.getPosition();
-        return currentPosition.getX() == square.getX() || currentPosition.getY() == square.getY();
-    }
-
-    @Override
     protected List<Square> getSquaresTillLocation(Square position) {
         int horizontalDiff = this.getPosition().getX() - position.getX();
         int verticalDiff = this.getPosition().getY() - position.getY();
