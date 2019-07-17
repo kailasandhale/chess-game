@@ -19,7 +19,7 @@ public class CacheUtil {
     private CacheUtil(){
         /* Added a private constructor to hide implicit public one */
     }
-    private static List<Player> players = new ArrayList<>();
+    private static List<Player> players = new ArrayList<>(); // This needs to be loaded by the application on startup
 
     private static final Map<Square, Piece> squarePieceMap = new HashMap<>();
 

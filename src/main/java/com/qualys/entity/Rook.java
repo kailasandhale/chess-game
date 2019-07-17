@@ -1,6 +1,5 @@
 package com.qualys.entity;
 
-import java.sql.SQLClientInfoException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +15,8 @@ public class Rook extends Piece {
 
     @Override
     public boolean isValidTarget(Square square) {
-        return false;
+        Square currentPosition = this.getPosition();
+        return currentPosition.getX() == square.getX() || currentPosition.getY() == square.getY();
     }
 
     @Override
