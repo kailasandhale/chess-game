@@ -54,7 +54,7 @@ public class Queen extends Piece {
         return squaresTillPosition;
     }
 
-    List<Square> getHorizontalSquares(Square source, int offset) {
+    private List<Square> getHorizontalSquares(Square source, int offset) {
         List<Square> squares = new ArrayList<>();
         for(int location = 0; location< offset; location++){
             squares.add(new Square(source.getX(),source.getY() + location));
@@ -62,7 +62,7 @@ public class Queen extends Piece {
         return squares;
     }
 
-    List<Square> getVerticalSquares(Square source, int offset) {
+    private List<Square> getVerticalSquares(Square source, int offset) {
         List<Square> squares = new ArrayList<>();
         for(int location = 0; location< offset; location++){
             squares.add(new Square(source.getX() + location, source.getY()));
@@ -70,7 +70,7 @@ public class Queen extends Piece {
         return squares;
     }
 
-    int getFactor(boolean condition) {
+    private int getFactor(boolean condition) {
         int horizontalFactor = 1;
         if (condition) {
             horizontalFactor = -1;

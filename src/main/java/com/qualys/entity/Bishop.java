@@ -33,7 +33,7 @@ public class Bishop extends Piece {
         return squares;
     }
 
-    int getFactor(boolean condition) {
+    private int getFactor(boolean condition) {
         int horizontalFactor = 1;
         if (condition) {
             horizontalFactor = -1;
