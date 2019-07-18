@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -16,10 +17,11 @@ public class Player {
 
     public Player(boolean white) {
         this.white = white;
+        pieces = new ArrayList<>();
     }
 
     public boolean isOpponentPiece(Piece piece) {
-        return pieces.stream().noneMatch(piece::equals);
+        return piece.isWhite() != this.isWhite();
     }
 
     public boolean addPiece(Piece piece){
@@ -30,12 +32,12 @@ public class Player {
         return pieces.remove(piece);
     }
 
-    public boolean isCheckMate() throws IllegalStatesException {
+    public boolean isCheckMate(){
         King king = this.getKing();
         return king.isCheckMate();
     }
 
-    private King getKing() throws IllegalStatesException {
+    private King getKing(){
         return (King) this.getPieces().stream()
                 .filter(piece -> piece instanceof King).findFirst()
                 .orElseThrow(() -> new IllegalStatesException(IllegalStatesException.KING_NOT_PRESENT_EXCEPTION));

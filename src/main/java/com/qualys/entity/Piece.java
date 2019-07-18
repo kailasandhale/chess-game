@@ -1,19 +1,15 @@
 package com.qualys.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode
 public abstract class Piece {
     private boolean alive;
@@ -30,12 +26,8 @@ public abstract class Piece {
         return isValidMove(this.getPosition(),square);
     }
 
-    public boolean isValidTarget(List<Square> square) {
-        return square.stream().allMatch(currentPosition -> isValidMove(this.getPosition(),currentPosition));
-    }
-
-    protected  Player getOpponentPlayer() {
-        return new Player(!this.isWhite());
+    public boolean isAnyValidTarget(List<Square> squares) {
+        return squares.stream().anyMatch(currentPosition -> isValidMove(this.getPosition(),currentPosition));
     }
 
     protected abstract List<Square> getSquaresTillLocation(Square position);

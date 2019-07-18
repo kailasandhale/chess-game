@@ -6,6 +6,10 @@ import java.util.List;
 
 public class Bishop extends Piece implements MovementBehaviour {
 
+    public Bishop(boolean alive, Square position, boolean white) {
+        super(alive, position, white);
+    }
+
     @Override
     protected boolean isValidMove( Square source, Square dest) {
         if(!super.isValidMove( source, dest)){

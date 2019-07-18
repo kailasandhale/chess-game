@@ -6,9 +6,13 @@ import java.util.List;
 
 public class Queen extends Piece implements MovementBehaviour {
 
+    public Queen(Square position, boolean white) {
+        super(true, position, white);
+    }
+
     @Override
     protected boolean isValidMove(Square source, Square dest) {
-        if(super.isValidMove(source, dest)){
+        if(!super.isValidMove(source, dest)){
             return false;
         }
 

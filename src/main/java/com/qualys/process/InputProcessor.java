@@ -1,22 +1,22 @@
 package com.qualys.process;
 
-import com.qualys.entity.Board;
 import com.qualys.entity.Piece;
 import com.qualys.entity.Player;
-import com.qualys.entity.Square;
-import com.qualys.exception.IllegalStatesException;
 import com.qualys.util.CacheUtil;
 
-import java.util.Map;
+import java.util.List;
 
 public class InputProcessor {
-    Board board = new Board();
 
-    public boolean isCheckMate(Map<Square, Piece> squarePieceMap, boolean isWhite) throws IllegalStatesException {
-        CacheUtil.getSquarePieceMap().clear();
-        CacheUtil.getSquarePieceMap().putAll(squarePieceMap);
-        Player player = CacheUtil.getPlayer(isWhite);
+    public boolean isCheckMate(List<Piece> pieces, Player player)  {
+        initialize(pieces);
         return player.isCheckMate();
+    }
+
+
+    private void initialize(List<Piece> pieces) {
+        pieces.forEach(piece -> CacheUtil.addPieceToSquare(piece.getPosition(),piece));
+        pieces.forEach(piece -> CacheUtil.getPlayer(piece.isWhite()).addPiece(piece));
     }
 
 }

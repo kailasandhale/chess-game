@@ -1,6 +1,5 @@
 package com.qualys.entity;
 
-import com.qualys.exception.IllegalStatesException;
 import com.qualys.util.CacheUtil;
 
 import java.util.ArrayList;
@@ -9,6 +8,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class King extends Piece {
+
+    public King(Square position, boolean isWhite){
+        super(true,position,isWhite);
+    }
 
     @Override
     public boolean isValidMove(Square source, Square dest){
@@ -36,7 +39,8 @@ public class King extends Piece {
 
         for (int[] offset : offsets) {
             Square square = currentPosition.getNeighbour(offset[0], offset[1]);
-            if (square.isValid() && (CacheUtil.getPiece(square) == null || player.isOpponentPiece(CacheUtil.getPiece(square)))) {
+            Piece pieceAtSquare = CacheUtil.getPiece(square);
+            if (square.isValid() && (CacheUtil.getPiece(square) == null || player.isOpponentPiece(pieceAtSquare) )) {
                 possibleMoves.add(square);
             }
         }
@@ -49,33 +53,48 @@ public class King extends Piece {
         return Collections.emptyList();
     }
 
-    public boolean isCheckMate() throws IllegalStatesException {
-        Player opponent = getOpponentPlayer();
+    public boolean isCheckMate() {
+        Player player = CacheUtil.getPlayer(this.isWhite());
+        Player opponent = CacheUtil.getOpponent(player);
         List<Piece> opponentPiecesGivingCheck = getOpponentPiecesGivingCheck(opponent);
-        List<Square> possibleMoves = getPossibleMoves(CacheUtil.getPlayer(this.isWhite()));
+        List<Square> possibleMoves = getPossibleMoves(player);
         if(opponentPiecesGivingCheck.isEmpty() || !allPossiblePositionsChecked(opponent, possibleMoves)){
             return false;
         } else if(opponentPiecesGivingCheck.size() > 1){
             return true;
         } else if(opponentPiecesGivingCheck.size() == 1){
             Piece pieceGivingCheck = opponentPiecesGivingCheck.get(0);
-            return canBeKilledOrBlocked(pieceGivingCheck);
+            return !canBeKilledOrBlocked(pieceGivingCheck);
         }
         return false;
     }
 
-    private boolean canBeKilledOrBlocked(Piece piece) {
-        List<Square> squaresBetweenPieceAndKing = getSquaresBetweenPieceAndKing(piece);
-        return squaresBetweenPieceAndKing.stream().anyMatch(this::isValidTarget);
+    private boolean canBeKilledOrBlocked(Piece opponentPiece) {
+        List<Square> squaresFromPieceToKing = getSquaresBetweenPieceAndKing(opponentPiece);
+        Player player = CacheUtil.getPlayer(this.isWhite());
+        return player.getPieces().stream().filter(piece -> !(piece instanceof King)).anyMatch(piece ->  piece.isAnyValidTarget(squaresFromPieceToKing));
     }
 
     private List<Square> getSquaresBetweenPieceAndKing(Piece piece) {
-        return piece.getSquaresTillLocation(piece.getPosition());
+        return piece.getSquaresTillLocation(this.getPosition());
     }
 
     private boolean allPossiblePositionsChecked(Player opponent, List<Square> possibleMoves) {
-        return opponent.getPieces().stream()
-                .allMatch(piece -> piece.isValidTarget(possibleMoves));
+        List<Piece> opponentPieces = opponent.getPieces();
+        for(Piece opponentPiece: opponentPieces){
+            updatePossibleMoves(opponentPiece,possibleMoves);
+        }
+        return possibleMoves.isEmpty();
+    }
+
+    private void updatePossibleMoves(Piece piece, List<Square> possibleMoves) {
+        List<Square> unavailableSquares = new ArrayList<>();
+        for(Square square:possibleMoves){
+            if(piece.isValidTarget(square)){
+                unavailableSquares.add(square);
+            }
+        }
+        possibleMoves.removeAll(unavailableSquares);
     }
 
     private List<Piece> getOpponentPiecesGivingCheck(Player opponent) {

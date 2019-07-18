@@ -5,6 +5,10 @@ import java.util.List;
 
 public class Knight extends Piece {
 
+    public Knight(Square position, boolean white) {
+        super(true, position, white);
+    }
+
     @Override
     protected boolean isValidMove(Square source, Square dest) {
         if(!super.isValidMove(source, dest)){

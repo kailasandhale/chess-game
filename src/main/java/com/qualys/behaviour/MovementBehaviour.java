@@ -11,11 +11,11 @@ public interface MovementBehaviour {
         int verticalDiff = source.getY() - target.getY();
         List<Square> squaresTillPosition = new ArrayList<>();
         if(0 == horizontalDiff){
-            return getVerticalSquares(source, verticalDiff);
+            return getHorizontalSquares(target, verticalDiff);
         } else if (0 == verticalDiff){
-            return getHorizontalSquares(source, horizontalDiff);
+            return getVerticalSquares(target, horizontalDiff);
         }
-        return squaresTillPosition;
+         return squaresTillPosition;
     }
 
     default List<Square> bishopMovement(Square source, Square target) {
