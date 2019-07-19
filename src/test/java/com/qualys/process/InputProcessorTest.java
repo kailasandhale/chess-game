@@ -3,7 +3,6 @@ package com.qualys.process;
 import com.qualys.entity.Bishop;
 import com.qualys.entity.King;
 import com.qualys.entity.Knight;
-import com.qualys.entity.Pawn;
 import com.qualys.entity.Piece;
 import com.qualys.entity.Player;
 import com.qualys.entity.Queen;
