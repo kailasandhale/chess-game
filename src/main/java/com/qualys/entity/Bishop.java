@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Bishop extends Piece implements MovementBehaviour {
 
-    public Bishop(boolean alive, Square position, boolean white) {
-        super(alive, position, white);
+    public Bishop(Square position, boolean white) {
+        super(true, position, white);
     }
 
     @Override
