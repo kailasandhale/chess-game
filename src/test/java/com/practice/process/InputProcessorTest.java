@@ -1,22 +1,22 @@
-package com.qualys.process;
+package com.practice.process;
 
-import com.qualys.entity.Bishop;
-import com.qualys.entity.King;
-import com.qualys.entity.Knight;
-import com.qualys.entity.Piece;
-import com.qualys.entity.Player;
-import com.qualys.entity.Queen;
-import com.qualys.entity.Rook;
-import com.qualys.entity.Square;
-import com.qualys.util.CacheUtil;
+import com.practice.entity.Bishop;
+import com.practice.entity.King;
+import com.practice.entity.Knight;
+import com.practice.entity.Piece;
+import com.practice.entity.Player;
+import com.practice.entity.Queen;
+import com.practice.entity.Rook;
+import com.practice.entity.Square;
+import com.practice.util.CacheUtil;
 import org.junit.After;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.qualys.util.Constants.BLACK;
-import static com.qualys.util.Constants.WHITE;
+import static com.practice.util.Constants.BLACK;
+import static com.practice.util.Constants.WHITE;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 

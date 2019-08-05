@@ -1,9 +1,9 @@
-package com.qualys.util;
+package com.practice.util;
 
-import com.qualys.entity.Piece;
-import com.qualys.entity.Player;
-import com.qualys.entity.Square;
-import com.qualys.exception.IllegalStatesException;
+import com.practice.entity.Piece;
+import com.practice.entity.Player;
+import com.practice.entity.Square;
+import com.practice.exception.IllegalStatesException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,8 +12,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-import static com.qualys.exception.IllegalStatesException.OPPONENT_NOT_PRESENT_EXCEPTION;
-import static com.qualys.exception.IllegalStatesException.PLAYER_NOT_PRESENT_EXCEPTION;
+import static com.practice.exception.IllegalStatesException.OPPONENT_NOT_PRESENT_EXCEPTION;
+import static com.practice.exception.IllegalStatesException.PLAYER_NOT_PRESENT_EXCEPTION;
 
 public class CacheUtil {
 

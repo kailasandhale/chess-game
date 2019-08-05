@@ -1,6 +1,6 @@
-package com.qualys.entity;
+package com.practice.entity;
 
-import com.qualys.exception.IllegalStatesException;
+import com.practice.exception.IllegalStatesException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package com.qualys.util;
+package com.practice.util;
 
 public class Constants {
     private Constants(){

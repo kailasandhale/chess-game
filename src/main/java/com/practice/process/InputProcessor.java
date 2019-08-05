@@ -1,12 +1,12 @@
-package com.qualys.process;
+package com.practice.process;
 
-import com.qualys.entity.Piece;
-import com.qualys.entity.Player;
-import com.qualys.util.CacheUtil;
+import com.practice.entity.Piece;
+import com.practice.entity.Player;
+import com.practice.util.CacheUtil;
 
 import java.util.List;
 
-public class InputProcessor {
+class InputProcessor {
 
     public boolean isCheckMate(List<Piece> pieces, Player player)  {
         initialize(pieces);

@@ -1,4 +1,4 @@
-package com.qualys.entity;
+package com.practice.entity;
 
 import java.util.Collections;
 import java.util.List;

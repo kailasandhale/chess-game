@@ -1,4 +1,4 @@
-package com.qualys.entity;
+package com.practice.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

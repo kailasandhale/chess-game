@@ -1,6 +1,6 @@
-package com.qualys.behaviour;
+package com.practice.behaviour;
 
-import com.qualys.entity.Square;
+import com.practice.entity.Square;
 
 import java.util.ArrayList;
 import java.util.List;

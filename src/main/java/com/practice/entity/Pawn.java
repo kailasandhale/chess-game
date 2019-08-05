@@ -1,6 +1,6 @@
-package com.qualys.entity;
+package com.practice.entity;
 
-import com.qualys.util.CacheUtil;
+import com.practice.util.CacheUtil;
 
 import java.util.Collections;
 import java.util.List;

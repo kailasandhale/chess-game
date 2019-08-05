@@ -1,6 +1,6 @@
-package com.qualys.entity;
+package com.practice.entity;
 
-import com.qualys.behaviour.MovementBehaviour;
+import com.practice.behaviour.MovementBehaviour;
 
 import java.util.List;
 
